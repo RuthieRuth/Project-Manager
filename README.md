@@ -13,6 +13,9 @@ The output directory is automatically generated based on tsconfig.json
 # PM app (step-by-step)
 
 ProjectManager(PM)App using TS beings ...
+- see the file structure and find src folder
+- find the typescript file; app.ts
+- see the other folders; components, decorators, models,
 
 # Use for reference
 

@@ -61,6 +61,7 @@ class ProjectInput extends _base_component__WEBPACK_IMPORTED_MODULE_0__.Componen
         this.titleInputElement = this.element.querySelector('#title');
         this.descriptionInputElement = this.element.querySelector('#description');
         this.peopleInputElement = this.element.querySelector('#people');
+        this.commentInputElement = this.element.querySelector('#comment');
         this.configure();
     }
     configure() {
@@ -71,6 +72,8 @@ class ProjectInput extends _base_component__WEBPACK_IMPORTED_MODULE_0__.Componen
         const enteredTitle = this.titleInputElement.value;
         const enteredDescription = this.descriptionInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
+        const enteredComment = this.commentInputElement.value;
+
         const titleValidatable = {
             value: enteredTitle,
             required: true,
@@ -86,27 +89,34 @@ class ProjectInput extends _base_component__WEBPACK_IMPORTED_MODULE_0__.Componen
             min: 1,
             max: 5,
         };
+        const commentValidatable = {
+            value: enteredComment,
+            required: true,
+        }
+
         if (!(0,_util_validation__WEBPACK_IMPORTED_MODULE_1__.validate)(titleValidatable) ||
             !(0,_util_validation__WEBPACK_IMPORTED_MODULE_1__.validate)(descriptionValidatable) ||
-            !(0,_util_validation__WEBPACK_IMPORTED_MODULE_1__.validate)(peopleValidatable)) {
+            !(0,_util_validation__WEBPACK_IMPORTED_MODULE_1__.validate)(peopleValidatable) ||
+            !(0,_util_validation__WEBPACK_IMPORTED_MODULE_1__.validate)(commentValidatable)) {
             alert('Invalid input, please try again!');
             return;
         }
         else {
-            return [enteredTitle, enteredDescription, +enteredPeople];
+            return [enteredTitle, enteredDescription, +enteredPeople, enteredComment];
         }
     }
     clearInputs() {
         this.titleInputElement.value = '';
         this.descriptionInputElement.value = '';
         this.peopleInputElement.value = '';
+        this.commentInputElement.value = '';
     }
     submitHandler(event) {
         event.preventDefault();
         const userInput = this.gatherUserInput();
         if (Array.isArray(userInput)) {
-            const [title, desc, people] = userInput;
-            _state_project_state__WEBPACK_IMPORTED_MODULE_3__.projectState.addProject(title, desc, people);
+            const [title, desc, people,comment] = userInput;
+            _state_project_state__WEBPACK_IMPORTED_MODULE_3__.projectState.addProject(title, desc, people,comment);
             this.clearInputs();
         }
     }
@@ -168,6 +178,7 @@ class ProjectItem extends _base_component__WEBPACK_IMPORTED_MODULE_0__.Component
         this.element.querySelector('h2').textContent = this.project.title;
         this.element.querySelector('h3').textContent = this.persons + ' assigned';
         this.element.querySelector('p').textContent = this.project.description;
+        this.element.querySelector('p').textContent = this.project.comment;
     }
 }
 __decorate([
